@@ -1,8 +1,13 @@
 import User from '../mongoose/schemas/user.schema.ts';
 
 import { hashPassword } from '../utils/helper.util.ts'
+import ApiError from '../utils/apiErrors.util.ts';
+import { status } from 'http-status';
 
 const register = async (firstName : string, lastName : string, email : string, password : string, role : string) => {
+  if (await User.isEmailTaken(email)) {
+    throw new ApiError(status.BAD_REQUEST, 'Email already taken');
+  }
   const newUser = new User({
     firstName,
     lastName,
