@@ -19,6 +19,11 @@ const register = async (firstName : string, lastName : string, email : string, p
   return savedUser;
 };
 
+const queryUsers = async (filter: object, options: object) => {
+  const users = await User.paginate(filter, options);
+  return users;
+}
+
 const findByEmail = async (email : string) => {
   return await User.findOne({ email });
 };
@@ -33,4 +38,4 @@ const checkIfExist = async (email : string) : Promise<boolean> => {
   return true;
 };
 
-export { register, findByEmail, findById, checkIfExist };
+export { register, findByEmail, findById, checkIfExist, queryUsers };
