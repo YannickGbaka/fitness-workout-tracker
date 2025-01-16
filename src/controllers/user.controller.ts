@@ -2,7 +2,7 @@
 import catchAsync from "../utils/catchAsync.util.ts";
 import ApiError from "../utils/apiErrors.util.ts";
 import * as userService from '../services/user.service.ts';
-
+import { status as httpStatus} from "http-status";
 
 const getUsers = catchAsync(async (request, response) => {
     const filter:{name, role} = request.query;
@@ -14,13 +14,13 @@ const getUsers = catchAsync(async (request, response) => {
     response.send(result);
   });
 
-//   const getUser = catchAsync(async (req, res) => {
-//     const user = await getUserById(req.params.userId);
-//     if (!user) {
-//       throw new ApiError(status.NOT_FOUND, 'User not found');
-//     }
-//     res.send(user);
-//   });
+  const getUser = catchAsync(async (req, res) => {
+    const user = await userService.findById(req.params.userId);
+    if (!user) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+    }
+    res.send(user);
+  });
   
 //   const updateUser = catchAsync(async (req, res) => {
 //     const user = await userService.updateUserById(req.params.userId, req.body);
@@ -32,4 +32,4 @@ const getUsers = catchAsync(async (request, response) => {
 //     res.status(httpStatus.NO_CONTENT).send();
 //   });
 
-export {getUsers}
+export {getUsers, getUser}

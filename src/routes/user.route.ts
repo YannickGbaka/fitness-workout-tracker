@@ -8,4 +8,7 @@ userRouter
     .get(userController.getUsers);
 
 
+    userRouter.route('/:userId').get(userController.getUser);
+
+
 export default userRouter;

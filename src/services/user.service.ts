@@ -32,6 +32,7 @@ const findById = async (id) => {
   return await User.findById(id);
 };
 
+
 const checkIfExist = async (email : string) : Promise<boolean> => {
   const foundUser = await findByEmail(email);
   if (!foundUser) return false;
