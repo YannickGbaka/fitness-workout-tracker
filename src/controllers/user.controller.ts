@@ -27,9 +27,9 @@ const getUsers = catchAsync(async (request, response) => {
     res.send(user);
   });
   
-//   const deleteUser = catchAsync(async (req, res) => {
-//     await userService.deleteUserById(req.params.userId);
-//     res.status(httpStatus.NO_CONTENT).send();
-//   });
+  const deleteUser = catchAsync(async (req, res) => {
+    await userService.deleteUserById(req.params.userId);
+    res.status(httpStatus.NO_CONTENT).send();
+  });
 
-export {getUsers, getUser, updateUser}
+export {getUsers, getUser, updateUser, deleteUser}

@@ -52,4 +52,13 @@ const updateUserById = async (userId, updateBody) => {
   return user;
 };
 
-export { register, findByEmail, findById, checkIfExist, queryUsers, updateUserById };
+const deleteUserById = async (userId) => {
+  const user = await findById(userId);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  await user.deleteOne();
+  return user;
+};
+
+export { register, findByEmail, findById, checkIfExist, queryUsers, updateUserById, deleteUserById };
