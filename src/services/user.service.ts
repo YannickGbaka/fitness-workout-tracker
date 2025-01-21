@@ -2,11 +2,11 @@ import User from '../mongoose/schemas/user.schema.ts';
 
 import { hashPassword } from '../utils/helper.util.ts'
 import ApiError from '../utils/apiErrors.util.ts';
-import { status } from 'http-status';
+import { status as httpStatus } from 'http-status';
 
 const register = async (firstName : string, lastName : string, email : string, password : string, role : string) => {
   if (await User.isEmailTaken(email)) {
-    throw new ApiError(status.BAD_REQUEST, 'Email already taken');
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
   const newUser = new User({
     firstName,
@@ -39,4 +39,17 @@ const checkIfExist = async (email : string) : Promise<boolean> => {
   return true;
 };
 
-export { register, findByEmail, findById, checkIfExist, queryUsers };
+const updateUserById = async (userId, updateBody) => {
+  const user = await findById(userId);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  if (updateBody.email && (await User.isEmailTaken(updateBody.email, userId))) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+  }
+  Object.assign(user, updateBody);
+  await user.save();
+  return user;
+};
+
+export { register, findByEmail, findById, checkIfExist, queryUsers, updateUserById };

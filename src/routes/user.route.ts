@@ -8,7 +8,9 @@ userRouter
     .get(userController.getUsers);
 
 
-    userRouter.route('/:userId').get(userController.getUser);
+    userRouter.route('/:userId')
+        .get(userController.getUser)
+        .put(userController.updateUser);
 
 
 export default userRouter;
