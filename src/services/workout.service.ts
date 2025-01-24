@@ -28,4 +28,4 @@ const update = async(id, data) =>{
     return workout;
 }
 
-export {createWorkout, findAll, update};
+export {createWorkout, findAll, findById, update};

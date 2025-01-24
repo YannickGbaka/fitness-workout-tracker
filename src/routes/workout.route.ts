@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { getWorkouts, storeWorkout, updateWorkout } from '../controllers/workout.controller.ts';
+import { getWorkouts, storeWorkout, updateWorkout, getWorkout } from '../controllers/workout.controller.ts';
 import { checkSchema } from 'express-validator';
 import { workoutValidationSchema, workoutUpdateValidationSchema } from '../utils/validations/workout.validation.ts';
 
@@ -11,6 +11,7 @@ workoutRouter.route('/')
 
 workoutRouter
     .route('/:id')
+    .get(getWorkout)
     .put(checkSchema(workoutUpdateValidationSchema), updateWorkout)
 
 export default workoutRouter;
