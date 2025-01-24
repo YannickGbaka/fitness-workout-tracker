@@ -1,12 +1,16 @@
 import {Router} from 'express';
-import { getWorkouts, storeWorkout } from '../controllers/workout.controller.ts';
+import { getWorkouts, storeWorkout, updateWorkout } from '../controllers/workout.controller.ts';
 import { checkSchema } from 'express-validator';
-import workoutValidationSchema from '../utils/validations/workout.validation.ts';
+import { workoutValidationSchema, workoutUpdateValidationSchema } from '../utils/validations/workout.validation.ts';
 
 const workoutRouter = Router();
 
-workoutRouter.route('/', checkSchema(workoutValidationSchema))
-    .post(storeWorkout)
-    .get(getWorkouts);
+workoutRouter.route('/')
+    .post(checkSchema(workoutValidationSchema), storeWorkout)
+    .get(getWorkouts)
+
+workoutRouter
+    .route('/:id')
+    .put(checkSchema(workoutUpdateValidationSchema), updateWorkout)
 
 export default workoutRouter;

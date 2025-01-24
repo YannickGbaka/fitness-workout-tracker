@@ -19,7 +19,17 @@ const getWorkouts = catchAsync(async (request, response)=>{
     return response.send(workouts);
 });
 
-export {storeWorkout, getWorkouts}
+const updateWorkout = catchAsync(async (request, response) =>{
+    const results = validationResult(request);
+    if(!results.isEmpty()){
+        return response.status(httpStatus.BAD_REQUEST).json(results.array());
+    }
+    const {id} = request.params;
+    const workout = await workoutService.update(id, request.body);
+    return response.status(httpStatus.OK).json(workout);
+});
+
+export {storeWorkout, getWorkouts, updateWorkout}
 
 
 

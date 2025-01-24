@@ -1,4 +1,7 @@
+import { workerData } from "worker_threads";
 import Workout from "../mongoose/schemas/workout.schema.ts";
+import ApiError from "../utils/apiErrors.util.ts";
+import {status as httpStatus} from 'http-status';
 
 const createWorkout = async (workoutData) =>{
     const workout = await Workout.create(workoutData);
@@ -11,4 +14,18 @@ const findAll = async()=>{
     return workouts;
 }
 
-export {createWorkout, findAll};
+const findById = async(id) =>{
+    return await Workout.findById(id);
+}
+
+const update = async(id, data) =>{
+    const workout = await findById(id);
+    if (!workout) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Workout not found');
+    }
+    Object.assign(workout, data);
+    (await workout).save();
+    return workout;
+}
+
+export {createWorkout, findAll, update};
