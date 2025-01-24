@@ -7,6 +7,7 @@ import ApiError from './utils/apiErrors.util.ts';
 import status from 'http-status';
 import authLimiter from './middlewares/rateLimiter.middleware.ts';
 import userRouter from './routes/user.route.ts';
+import workoutRouter from './routes/workout.route.ts';
 import('./strategies/jwt-strategy.ts');
 const app = express();
 
@@ -21,6 +22,7 @@ app.get('/', (request, response)=>{
 })
 app.use('/api/v1/auth', authLimiter, authRouter);
 app.use('/api/v1/users', userRouter)
+app.use('/api/v1/workouts', workoutRouter);
 // handle error
 // send back a 404 error for any unknown api request
 

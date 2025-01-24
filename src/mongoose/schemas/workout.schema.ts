@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
-import toJSON from '../plugins/toJSON.plugin';
-import Status from '../../config/statusEnum';
+import toJSON from '../plugins/toJSON.plugin.ts';
 
 
 const workoutSchema = new mongoose.Schema({
@@ -22,8 +21,8 @@ const workoutSchema = new mongoose.Schema({
     status: {
         type : String,
         required: true,
-        enum: Object.values(Status),
-        default: Status.PENDING,
+        enum: ['pending', 'completed'],
+        default: 'pending',
     },
     createdAt: {
         type: Date,
@@ -44,6 +43,6 @@ workoutSchema.pre('save', function(next){
 });
 
 workoutSchema.plugin(toJSON);
-const workout = mongoose.model('Workout', workoutSchema);
+const Workout = mongoose.model('Workout', workoutSchema);
 
-export default workout;
+export default Workout;
