@@ -6,4 +6,9 @@ const createWorkout = async (workoutData) =>{
     return workout;
 }
 
-export {createWorkout};
+const findAll = async()=>{
+    const workouts = await Workout.find();
+    return workouts;
+}
+
+export {createWorkout, findAll};

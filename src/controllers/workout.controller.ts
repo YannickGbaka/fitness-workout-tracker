@@ -14,7 +14,12 @@ const storeWorkout = catchAsync(async (request, response)=>{
     return response.status(httpStatus.CREATED).send(workout);
 });
 
-export {storeWorkout}
+const getWorkouts = catchAsync(async (request, response)=>{
+    const workouts = await workoutService.findAll();
+    return response.send(workouts);
+});
+
+export {storeWorkout, getWorkouts}
 
 
 
