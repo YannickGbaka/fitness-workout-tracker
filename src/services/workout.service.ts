@@ -17,7 +17,7 @@ const findAll = async()=>{
 const findById = async(id) =>{
     return await Workout.findById(id);
 }
-
+  
 const update = async(id, data) =>{
     const workout = await findById(id);
     if (!workout) {
@@ -28,4 +28,12 @@ const update = async(id, data) =>{
     return workout;
 }
 
-export {createWorkout, findAll, findById, update};
+const remove = async (id) =>{
+    const workout = await findById(id);
+    if(!workout){
+       throw new ApiError(httpStatus.NOT_FOUND, 'Workout not found');
+    }
+    (await workout).deleteOne();
+}
+
+export {createWorkout, findAll, findById, update, remove};

@@ -35,8 +35,14 @@ const updateWorkout = catchAsync(async (request, response) =>{
     return response.status(httpStatus.OK).json(workout);
 });
 
+const removeWorkout = catchAsync(async (request, response)=>{
+    const {id} = request.params;
+    await workoutService.remove(id);
+    response.status(httpStatus.NO_CONTENT).send();
+});
 
-export {storeWorkout, getWorkouts, getWorkout, updateWorkout}
+
+export {storeWorkout, getWorkouts, getWorkout, updateWorkout, removeWorkout}
 
 
 
