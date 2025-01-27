@@ -24,5 +24,17 @@ const storeExercice = catchAsync(async (request, response)=>{
     response.status(httpStatus.CREATED).send(exercice);
 }); 
 
+const getExercices = catchAsync(async (request, response)=>{
+    const {workoutId} = request.params;
 
-export {storeExercice};
+    const workout = await workoutService.findById(workoutId);
+
+    if (!workout) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Workout not found');
+    }
+
+    const exercices = await exerciceService.findAll(workoutId);
+    response.status(httpStatus.OK).send(exercices);
+});
+
+export {storeExercice, getExercices};

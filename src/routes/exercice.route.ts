@@ -1,11 +1,12 @@
 import {Router} from 'express';
 import * as exerciceController from '../controllers/exercice.controller.ts';
-import { checkSchema } from 'express-validator';
+import { checkSchema, param } from 'express-validator';
 import { exerciceCreateValidationSchema } from '../utils/validations/exercice.validation.ts';
 
 const exerciceRouter = Router({mergeParams: true});
 
-exerciceRouter.route('/').post(checkSchema(exerciceCreateValidationSchema), exerciceController.storeExercice);
+exerciceRouter.route('/').post(checkSchema(exerciceCreateValidationSchema), exerciceController.storeExercice)
+    .get(param("workoutId").notEmpty().withMessage("The workoutId is not defined"), exerciceController.getExercices);
 
 
 export default exerciceRouter;
