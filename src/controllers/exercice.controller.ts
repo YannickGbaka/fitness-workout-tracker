@@ -37,4 +37,10 @@ const getExercices = catchAsync(async (request, response)=>{
     response.status(httpStatus.OK).send(exercices);
 });
 
-export {storeExercice, getExercices};
+const getExercice = catchAsync(async (request, response)=>{
+    const {exerciceId, workoutId} = request.params;
+    const exercice = await exerciceService.findById(exerciceId);
+    response.send(exercice);
+});
+
+export {storeExercice, getExercices, getExercice};

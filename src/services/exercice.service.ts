@@ -10,4 +10,9 @@ const findAll = async(workoutId)=>{
     const exercices = await Exercice.find({workoutId});
     return exercices;
 }
-export {createExercice, findAll};
+
+const findById = async(id)=>{
+    return await Exercice.findById(id);
+}
+
+export {createExercice, findAll, findById};

@@ -8,5 +8,7 @@ const exerciceRouter = Router({mergeParams: true});
 exerciceRouter.route('/').post(checkSchema(exerciceCreateValidationSchema), exerciceController.storeExercice)
     .get(param("workoutId").notEmpty().withMessage("The workoutId is not defined"), exerciceController.getExercices);
 
+exerciceRouter.route('/:exerciceId').get(param('exerciceId').notEmpty().withMessage("The exercice Id is not defined"), exerciceController.getExercice);
+
 
 export default exerciceRouter;
