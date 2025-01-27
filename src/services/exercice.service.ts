@@ -26,8 +26,18 @@ const update = async(id, newData)=>{
 
     Object.assign(exercice, newData);
     await exercice.save();
-    
+
     return exercice;
 }
 
-export {createExercice, findAll, findById, update};
+const remove = async(id)=>{
+    const exercice = await findById(id);
+
+    if (!exercice) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Exercice not found');
+    }
+
+    return (await exercice).deleteOne();
+}
+
+export {createExercice, findAll, findById, update, remove};

@@ -58,4 +58,10 @@ const updateExercice = catchAsync(async (request, response)=>{
 
 });
 
-export {storeExercice, getExercices, getExercice, updateExercice};
+const removeExercice = catchAsync(async (request, response)=>{
+    const {exerciceId} = request.params;
+    await exerciceService.remove(exerciceId);
+    response.status(httpStatus.NO_CONTENT).send();
+});
+
+export {storeExercice, getExercices, getExercice, updateExercice, removeExercice};

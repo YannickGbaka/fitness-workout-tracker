@@ -10,7 +10,8 @@ exerciceRouter.route('/').post(checkSchema(exerciceCreateValidationSchema), exer
 
 exerciceRouter.route('/:exerciceId')
     .get(param('exerciceId').notEmpty().withMessage("The exercice Id is not defined"), exerciceController.getExercice)
-    .put(checkSchema(exerciceUpdateValidationSchema), exerciceController.updateExercice);
+    .put(checkSchema(exerciceUpdateValidationSchema), exerciceController.updateExercice)
+    .delete(exerciceController.removeExercice);
 
 
 export default exerciceRouter;
