@@ -1,4 +1,4 @@
-import { validationResult } from "express-validator";
+import { validationResult, matchedData} from "express-validator";
 import catchAsync from "../utils/catchAsync.util.ts";
 import {status as httpStatus} from 'http-status';
 import * as exerciceService from '../services/exercice.service.ts';
@@ -43,4 +43,19 @@ const getExercice = catchAsync(async (request, response)=>{
     response.send(exercice);
 });
 
-export {storeExercice, getExercices, getExercice};
+const updateExercice = catchAsync(async (request, response)=>{
+    const results = validationResult(request);
+    if(!results.isEmpty()){
+        response.status(httpStatus.BAD_REQUEST).send(results.array());
+    }
+
+    const {workoutId, exerciceId} = request.params;
+    //check if the exercice exists
+    const data = matchedData(request);
+    const exercice = await exerciceService.update(exerciceId, data);
+
+    response.status(httpStatus.OK).send(exercice);
+
+});
+
+export {storeExercice, getExercices, getExercice, updateExercice};

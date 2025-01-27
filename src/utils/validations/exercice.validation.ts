@@ -16,18 +16,25 @@ const exerciceCreateValidationSchema = {
         isString: true,
         optional: true,
     },
+}
+
+const exerciceUpdateValidationSchema = {
+    name:{
+        isString: true,
+        optional: true,
+    },
+    repsOrDuration: {
+        isString:  true,
+        optional: true,
+    },
+    notes: {
+        isString: true,
+        optional: true,
+    },
     // workoutId:{
-    //     in: ['params'],
-    //     custom: {
-    //         options: async (value)=>{
-    //             const workout = Workout.findById(value);
-    //             if(!workout){
-    //                 throw new ApiError(httpStatus.NOT_FOUND, "Workout id not found");
-    //             }
-    //             return true;
-    //         }
-    //     }
+    //     isObject: true,
+    //     optional: true
     // }
 }
 
-export {exerciceCreateValidationSchema};
+export {exerciceCreateValidationSchema, exerciceUpdateValidationSchema};
