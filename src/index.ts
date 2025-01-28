@@ -1,4 +1,5 @@
 import express from 'express';
+import passport from 'passport';
 import cors from 'cors';
 import authRouter from './routes/auth.routes.ts';
 import helmet from 'helmet';
@@ -9,6 +10,7 @@ import authLimiter from './middlewares/rateLimiter.middleware.ts';
 import userRouter from './routes/user.route.ts';
 import workoutRouter from './routes/workout.route.ts';
 import exerciceRouter from './routes/exercice.route.ts';
+import reportRouter from './routes/report.route.ts';
 import('./strategies/jwt-strategy.ts');
 const app = express();
 
@@ -25,6 +27,8 @@ app.use('/api/v1/auth', authLimiter, authRouter);
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/workouts', workoutRouter);
 app.use('/api/v1/workouts/:workoutId/exercices', exerciceRouter);
+app.use('/api/v1/reports', passport.authenticate('jwt', {session: false}), reportRouter);
+
 
 // handle error
 // send back a 404 error for any unknown api request
