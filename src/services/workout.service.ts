@@ -36,4 +36,24 @@ const remove = async (id) =>{
     (await workout).deleteOne();
 }
 
-export {createWorkout, findAll, findById, update, remove};
+const completedWorkoutQuery = async(userId, startDate = null, endDate = null)=>{
+    let query = { userId };
+    if(startDate && endDate){
+        query.scheduledDate = {
+            $gte: new Date(startDate as string),
+            $lte: new Date(endDate as string)
+        };
+    }
+    const workouts = await Workout.find(query);
+    const totalWorkouts = workouts.length;
+    const completedWorkouts = workouts.filter(workout => workout.status === 'completed').length;
+    const completionPercentage = totalWorkouts > 0 ? (completedWorkouts / totalWorkouts) * 100 : 0;
+
+    return {
+        totalWorkouts,
+        completedWorkouts,
+        completionPercentage
+    };
+}
+
+export {createWorkout, findAll, findById, update, remove,completedWorkoutQuery };
