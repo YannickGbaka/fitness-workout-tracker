@@ -1,7 +1,7 @@
 import express from 'express';
 import passport from 'passport';
 import cors from 'cors';
-import authRouter from './routes/auth.routes.ts';
+import authRouter from './routes/auth.route.ts';
 import helmet from 'helmet';
 import {errorHandler, errorConverter} from './middlewares/error.middleware.ts';
 import ApiError from './utils/apiErrors.util.ts';
