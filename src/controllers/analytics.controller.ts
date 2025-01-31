@@ -1,16 +1,7 @@
 import catchAsync from "../utils/catchAsync.util.ts";
-import * as workoutService from '../services/workout.service.ts';
+import { status as httpStatus } from 'http-status';
 import * as analyticsService from '../services/exerciseAnalytics.service.ts';
 import ApiError from "../utils/apiErrors.util.ts";
-import { status as httpStatus } from 'http-status';
-
-const getCompletedWorkouts = catchAsync(async (request, response) => {
-    const { startDate, endDate } = request.query;
-    const userId = request.user?._id;
-
-    const data = await workoutService.completedWorkoutQuery(userId, startDate, endDate);
-    response.send(data);
-});
 
 const getExerciseTrends = catchAsync(async (request, response) => {
     const { startDate, endDate } = request.query;
@@ -26,13 +17,7 @@ const getExerciseTrends = catchAsync(async (request, response) => {
         new Date(endDate as string)
     );
 
-    response.status(httpStatus.OK).json({
-        trends,
-        period: {
-            startDate,
-            endDate
-        }
-    });
+    response.status(httpStatus.OK).json(trends);
 });
 
 const getWorkoutAnalytics = catchAsync(async (request, response) => {
@@ -49,13 +34,10 @@ const getWorkoutAnalytics = catchAsync(async (request, response) => {
         new Date(endDate as string)
     );
 
-    response.status(httpStatus.OK).json({
-        analytics,
-        period: {
-            startDate,
-            endDate
-        }
-    });
+    response.status(httpStatus.OK).json(analytics);
 });
 
-export { getCompletedWorkouts, getExerciseTrends, getWorkoutAnalytics };
+export {
+    getExerciseTrends,
+    getWorkoutAnalytics
+}; 

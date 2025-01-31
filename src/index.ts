@@ -12,6 +12,7 @@ import workoutRouter from './routes/workout.route.ts';
 import exerciceRouter from './routes/exercice.route.ts';
 import reportRouter from './routes/report.route.ts';
 import('./strategies/jwt-strategy.ts');
+import analyticsRouter from './routes/analytics.route.ts';
 const app = express();
 
 app.use(cors());
@@ -28,6 +29,7 @@ app.use('/api/v1/users', userRouter)
 app.use('/api/v1/workouts', workoutRouter);
 app.use('/api/v1/workouts/:workoutId/exercices', exerciceRouter);
 app.use('/api/v1/reports', passport.authenticate('jwt', {session: false}), reportRouter);
+app.use('/api/v1/analytics', passport.authenticate('jwt', {session: false}), analyticsRouter);
 
 
 // handle error
