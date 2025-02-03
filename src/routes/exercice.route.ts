@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import * as exerciceController from '../controllers/exercice.controller.ts';
-import { checkSchema, param } from 'express-validator';
+import { checkSchema, param, body } from 'express-validator';
 import { exerciceCreateValidationSchema, exerciceUpdateValidationSchema } from '../utils/validations/exercice.validation.ts';
 
 const exerciceRouter = Router({mergeParams: true});
@@ -13,5 +13,6 @@ exerciceRouter.route('/:exerciceId')
     .put(checkSchema(exerciceUpdateValidationSchema), exerciceController.updateExercice)
     .delete(exerciceController.removeExercice);
 
+exerciceRouter.post('/generate', param('workoutId').notEmpty().withMessage("The workout Id is not defined") ,exerciceController.generateExercices);
 
 export default exerciceRouter;
