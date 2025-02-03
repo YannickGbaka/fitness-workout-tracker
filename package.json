@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/YannickGbaka/fitness-workout-tracker#readme",
   "dependencies": {
+    "@huggingface/inference": "^3.1.5",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
@@ -29,6 +30,7 @@
     "http-status": "^2.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.3",
+    "ollama": "^0.5.12",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "winston": "^3.17.0"
