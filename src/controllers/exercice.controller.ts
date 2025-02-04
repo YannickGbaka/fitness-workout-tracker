@@ -89,7 +89,7 @@ const generateExercices = catchAsync(async (request, response)=>{
         Important : Your response must be ONLY a valid JSON array in the specified format. Do not include any additional text, explanations, or variations of the format.
     `;
 
-    const data = await aiService.generateResponse(prompt, "huggingface", "mistralai/Mixtral-8x7B-Instruct-v0.");
+    const data = await aiService.generateResponse(prompt, "huggingface", "mistralai/Mixtral-8x7B-Instruct-v0.1");
     response.status(httpStatus.OK).send(JSON.parse(data));
 })
 
