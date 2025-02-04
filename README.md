@@ -14,12 +14,18 @@ A RESTful API built with Express.js and TypeScript for managing fitness workouts
 - Protected routes with Passport.js
 - Rate limiting for security
 - Error handling middleware
+- AI-powered features:
+  - Smart exercise generation
+  - Workout analytics and trends
+  - Exercise recommendations
+  - Performance tracking
 
 ## Prerequisites
 
 - Node.js
 - MongoDB
 - npm or yarn
+- Hugging Face API key (for AI features)
 
 ## Installation
 
@@ -80,9 +86,13 @@ npm run dev
   - Required fields: name, repsOrDuration
 - PUT `/api/v1/workouts/:workoutId/exercices/:exerciceId` - Update exercise
 - DELETE `/api/v1/workouts/:workoutId/exercices/:exerciceId` - Delete exercise
+- POST `/api/v1/workouts/:workoutId/exercices/generate` - Generate AI-powered exercises
 
-### Reports
+### Analytics & Reports
 - GET `/api/v1/reports/completion` - Get workout completion statistics
+- GET `/api/v1/reports/exercise-trends` - Get exercise trend analysis
+- GET `/api/v1/analytics/exercise-trends` - Get detailed exercise analytics
+- GET `/api/v1/analytics/workout-analytics` - Get workout performance analytics
 
 ## Project Structure
 
@@ -114,6 +124,8 @@ fitness-workout-tracker/
 - Winston - Logging
 - Helmet - Security headers
 - Express Rate Limit - Rate limiting
+- Hugging Face - AI model integration
+- Ollama - Local AI model support
 
 ## Error Handling
 
