@@ -1,6 +1,8 @@
 # Fitness Workout Tracker API
 
+
 A RESTful API built with Express.js and TypeScript for managing fitness workouts, exercises, and user progress tracking.
+It is inspired by the Fitness Workout Tracker project from the Developer Roadmap [https://roadmap.sh/projects/fitness-workout-tracker](url).
 
 ## Features
 
