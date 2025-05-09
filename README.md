@@ -29,7 +29,13 @@ A RESTful API built with Express.js and TypeScript for managing fitness workouts
 
 ## Installation
 
-1. Clone the repository
+0. Project URL
+
+  ```
+PROJECT_URL=https://github.com/YannickGbaka/fitness-workout-tracker
+  ```
+
+2. Clone the repository
 ```bash
 git clone https://github.com/YannickGbaka/fitness-workout-tracker.git
 cd fitness-workout-tracker
