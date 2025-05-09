@@ -32,7 +32,7 @@ A RESTful API built with Express.js and TypeScript for managing fitness workouts
 0. Project URL
 
   ```
-PROJECT_URL=https://github.com/YannickGbaka/fitness-workout-tracker
+https://github.com/YannickGbaka/fitness-workout-tracker
   ```
 
 2. Clone the repository
